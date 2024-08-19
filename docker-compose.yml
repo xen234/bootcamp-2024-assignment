@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+
+  go-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    volumes:
+      - .:/app
+    environment:
+      - PORT=8081
+      - CONFIG_PATH=/app/config/dev.yaml
+      - STORAGE_PATH=/app/storage/storage.db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
